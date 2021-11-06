@@ -201,8 +201,7 @@ def get_overview(ticker):
                         'Industry', 'Address', 'FiscalYearEnd', 'LatestQuarter']
     profit_data = ['RevenueTTM', 'RevenuePerShareTTM', 'ProfitMargin','GrossProfitTTM', 'OperatingMarginTTM', 'EBITDA', \
                     'QuarterlyEarningsGrowthYOY', 'QuarterlyRevenueGrowthYOY']
-    dividend_data = ['DividendPerShare', 'DividendYield', 'PayoutRatio', \
-                        'ForwardAnnualDividendRate', 'ForwardAnnualDividendYield', 'DividendDate', 'ExDividendDate']
+    dividend_data = ['DividendPerShare', 'DividendYield', 'DividendDate', 'ExDividendDate']
     ratio_data = ['EPS','DilutedEPSTTM', 'PERatio', 'TrailingPE', 'ForwardPE', \
                     'BookValue', 'PriceToBookRatio','PEGRatio', 'EVToRevenue', 'EVToEBITDA','PriceToSalesRatioTTM']
     return_data = ['ReturnOnEquityTTM', 'ReturnOnAssetsTTM']
