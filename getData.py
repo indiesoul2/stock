@@ -205,7 +205,7 @@ def get_overview(ticker):
     ratio_data = ['EPS','DilutedEPSTTM', 'PERatio', 'TrailingPE', 'ForwardPE', \
                     'BookValue', 'PriceToBookRatio','PEGRatio', 'EVToRevenue', 'EVToEBITDA','PriceToSalesRatioTTM']
     return_data = ['ReturnOnEquityTTM', 'ReturnOnAssetsTTM']
-    price_data = ['Beta', '52WeekHigh', '52WeekLow', '50DayMovingAverage', '200DayMovingAverage']
+    price_data = ['52WeekHigh', '52WeekLow', '50DayMovingAverage', '200DayMovingAverage']
     volume_data = ['SharesOutstanding']
     valuation_data = ['AnalystTargetPrice']
 
