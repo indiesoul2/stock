@@ -216,8 +216,12 @@ def get_overview(ticker):
     ratio_df = df[ratio_data].T
     ratio_df.columns = ['Ratio']
     #PERR, PBRR 추가 해보자
-    ratio_df.loc['PERR'] = round(float(df.loc[0, 'TrailingPE'])/(float(df.loc[0, 'ReturnOnEquityTTM'])*100),2)
-    ratio_df.loc['PBRR'] = round(float(df.loc[0, 'PriceToBookRatio'])/(float(df.loc[0, 'ReturnOnEquityTTM'])*100/10),2)
+    try:
+        ratio_df.loc['PERR'] = round(float(df.loc[0, 'TrailingPE'])/(float(df.loc[0, 'ReturnOnEquityTTM'])*100),2)
+        ratio_df.loc['PBRR'] = round(float(df.loc[0, 'PriceToBookRatio'])/(float(df.loc[0, 'ReturnOnEquityTTM'])*100/10),2)
+    except:
+        df.loc[0, 'TrailingPE'] = 0
+        ratio_df.loc['PERR'] = round(float(df.loc[0, 'TrailingPE'])/(float(df.loc[0, 'ReturnOnEquityTTM'])*100),2)
     return_df = df[return_data].T.astype(float)*100
     return_df = return_df.round(2).astype(str) + "%"
     return_df.columns = ['Return']
