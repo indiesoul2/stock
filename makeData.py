@@ -24,7 +24,10 @@ def valuation(df, input_ticker):
     value_list.append(df.loc['Price',0])
     value_list.append(df.loc['AnalystTargetPrice',0])
     value_list.append(round(float(df.loc['TrailingPE',0]),2))
-    value_list.append(str(round(1/float(df.loc['TrailingPE',0])*100,2))+"%")
+    try:
+        value_list.append(str(round(1/float(df.loc['TrailingPE',0])*100,2))+"%")
+    except ZeroDivisionError as e:
+        value_list.append("-%")
     ##할인률 12%
     value_list.append(round(float(df.loc['BookValue',0])*(float(df.loc['ReturnOnEquityTTM', 0])/0.12),2))
     value_list.append(str(round((value_list[4]/value_list[0] -1)*100,2))+"%")
