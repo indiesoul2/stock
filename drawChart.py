@@ -76,7 +76,7 @@ def run():
     ))
     st.plotly_chart(fig)
     
-    if valuation_df.at['Earnings Yield'] == '-' or valuation_df.at['Valuation'] == '-'
+    if valuation_df.at['Earnings Yield'] == '-' or valuation_df.at['Valuation'] == '-':
         valuation_df.at['Earnings Yield', 'Valuation'] = 0
         
     fig = go.Figure(go.Indicator(
