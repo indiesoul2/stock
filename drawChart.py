@@ -75,7 +75,8 @@ def run():
         domain = {'x': [0, 1], 'y': [0, 1]}
     ))
     st.plotly_chart(fig)
-
+    
+    
     fig = go.Figure(go.Indicator(
         mode = "number+delta",
         value = float(valuation_df.at['Earnings Yield','Valuation'].replace("%","")),
