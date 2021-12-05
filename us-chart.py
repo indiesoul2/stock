@@ -7,6 +7,7 @@ import requests
 import json
 from pandas.io.json import json_normalize
 import plotly.express as px
+import plotly.io as pio
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 
@@ -17,6 +18,30 @@ import FinanceDataReader as fdr
 pd.set_option('display.float_format', '{:.2f}'.format)
 now = datetime.now() +pd.DateOffset(days=-1)
 today = '%s-%s-%s' % ( now.year, now.month, now.day)
+
+marker_colors = ['rgb(27,38,81)', 'rgb(205,32,40)', 'rgb(22,108,150)', 'rgb(255,0,255)', 'rgb(153,204,0)', \
+                       'rgb(153,51,102)', 'rgb(0,255,0)','rgb(255,69,0)', 'rgb(0,0,255)', 'rgb(255,204,0)', \
+                        'rgb(255,153,204)', 'rgb(0,255,255)', 'rgb(128,0,0)', 'rgb(0,128,0)', 'rgb(0,0,128)', \
+                         'rgb(128,128,0)', 'rgb(128,0,128)', 'rgb(0,128,128)', 'rgb(192,192,192)', 'rgb(153,153,255)', \
+                             'rgb(255,255,0)', 'rgb(255,255,204)', 'rgb(102,0,102)', 'rgb(255,128,128)', 'rgb(0,102,204)',\
+                                 'rgb(255,102,0)', 'rgb(51,51,51)', 'rgb(51,153,102)', 'rgb(51,153,102', 'rgb(204,153,255)']
+template = 'ggplot2' #"plotly", "plotly_white", "plotly_dark", "ggplot2", "seaborn", "simple_white", "none".
+pio.templates["myID"] = go.layout.Template(
+    layout_annotations=[
+        dict(
+            name="draft watermark",
+            text="graph by 기하급수적",
+            textangle=0,
+            opacity=0.2,
+            font=dict(color="black", size=20),
+            xref="paper",
+            yref="paper",
+            x=0.9,
+            y=-0.2,
+            showarrow=False,
+        )
+    ]
+)
 
 #API key
 fd = FD(key='XA7Y92OE6LDOTLLE')
@@ -155,9 +180,9 @@ def run():
 
     #챠트 기본 설정
     # colors 
-    marker_colors = ['#34314c', '#47b8e0', '#ff7473', '#ffc952', '#3ac569']
+    #marker_colors = ['#34314c', '#47b8e0', '#ff7473', '#ffc952', '#3ac569']
     # marker_colors = ['rgb(27,38,81)', 'rgb(205,32,40)', 'rgb(22,108,150)', 'rgb(255,69,0)', 'rgb(237,234,255)']
-    template = 'seaborn' #"plotly", "plotly_white", "plotly_dark", "ggplot2", "seaborn", "simple_white", "none"
+    #template = 'seaborn' #"plotly", "plotly_white", "plotly_dark", "ggplot2", "seaborn", "simple_white", "none"
 
     #주가와 EPS
     title = com_name +'('  + input_ticker + ') EPS & Price'
@@ -220,6 +245,7 @@ def run():
             type="date"
             )      
         )
+    fig.update_layout(template="myID")
     st.plotly_chart(fig)
 
     fig2 = go.Figure()
@@ -257,6 +283,7 @@ def run():
     fig.update_yaxes(title_text='Income', range=[-max(income_df.loc[:,y_data_line1[0]]), max(income_df.loc[:,y_data_line1[0]])* 1.2], secondary_y = True)
     fig.update_yaxes(showticklabels= True, showgrid = False, zeroline=True, tickprefix="$")
     fig.update_layout(title = titles, titlefont_size=15, legend=dict(orientation="h"), template=template)
+    fig.update_layout(template="myID")
     st.plotly_chart(fig)
 
     # 마진율과 성장률
@@ -281,6 +308,7 @@ def run():
     fig.update_yaxes(title_text='Margin Rate', range=[-max(income_df.loc[:,y_data_line2[0]]), max(income_df.loc[:,y_data_line2[0]])* 1.2], secondary_y = True)
     fig.update_yaxes(showticklabels= True, showgrid = False, zeroline=True, ticksuffix="%")
     fig.update_layout(title = titles, titlefont_size=15, legend=dict(orientation="h"), template=template)
+    fig.update_layout(template="myID")
     st.plotly_chart(fig)
 
     #부채비율, 유동비율, 당좌비율
@@ -309,6 +337,7 @@ def run():
     fig.update_yaxes(title_text= "Asset", showticklabels= True, showgrid = False, zeroline=True, tickprefix="$", secondary_y = False)
     fig.update_layout(title = titles, titlefont_size=15, legend=dict(orientation="h"), template=template)
     fig.update_layout(barmode='stack')
+    fig.update_layout(template="myID")
     st.plotly_chart(fig)
 
     #무형자산총자금비율, 현금자산비율
@@ -329,6 +358,7 @@ def run():
     fig.update_yaxes(title_text="Cash/Assets", showticklabels= True, showgrid = True, zeroline=True, ticksuffix="%", secondary_y = False)
     fig.update_yaxes(title_text="intangible/Assets", showticklabels= True, showgrid = False, zeroline=True, ticksuffix="%", secondary_y = True)
     fig.update_layout(title = titles, titlefont_size=15, legend=dict(orientation="h"), template=template)
+    fig.update_layout(template="myID")
     st.plotly_chart(fig)
 
     #현금흐름
@@ -348,6 +378,7 @@ def run():
     fig.update_traces(texttemplate='%{text:.3s}') 
     fig.update_yaxes(showticklabels= True, showgrid = True, zeroline=True, tickprefix="$")
     fig.update_layout(title = titles, titlefont_size=15, legend=dict(orientation="h"), template=template)
+    fig.update_layout(template="myID")
     st.plotly_chart(fig)
 
 
@@ -572,6 +603,7 @@ def visualize_PER_band(ticker, com_name, fun_df):
             type="date"
             )      
         )
+    fig.update_layout(template="myID")
     st.plotly_chart(fig)
 
     st.subheader('Band Chart')
@@ -597,6 +629,7 @@ def visualize_PER_band(ticker, com_name, fun_df):
     fig.update_traces(texttemplate='%{text:.3s}') 
     fig.update_yaxes(title_text="Price", showticklabels= True, showgrid = True, zeroline=True, tickprefix="$")
     fig.update_layout(title = titles, titlefont_size=15, legend=dict(orientation="h"), template="seaborn")
+    fig.update_layout(template="myID")
     st.plotly_chart(fig)
 
 def visualize_PBR_band(ticker, com_name, fun_df):
@@ -646,6 +679,7 @@ def visualize_PBR_band(ticker, com_name, fun_df):
     fig.update_traces(texttemplate='%{text:.3s}') 
     fig.update_yaxes(title_text="Price", showticklabels= True, showgrid = True, zeroline=True, tickprefix="$")
     fig.update_layout(title = titles, titlefont_size=15, legend=dict(orientation="h"), template="seaborn")
+    fig.update_layout(template="myID")
     st.plotly_chart(fig)
         
 
