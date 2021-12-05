@@ -59,6 +59,7 @@ def income_chart(input_ticker, income_df, income_df_q):
     fig.update_yaxes(title_text='Income', range=[-max(income_df.loc[:,y_data_line[0]]), max(income_df.loc[:,y_data_line[0]])* 1.2], secondary_y = True)
     fig.update_yaxes(showticklabels= True, showgrid = False, zeroline=True, tickprefix="%")
     fig.update_layout(title = titles, titlefont_size=15, legend=dict(orientation="h"), template=template)
+    fig.update_layout(template="myID")
     st.plotly_chart(fig)
 
     # Profit and Margin
@@ -83,6 +84,7 @@ def income_chart(input_ticker, income_df, income_df_q):
     fig.update_yaxes(title_text='Income', range=[-max(income_df_q.loc[:,y_data_line[0]]), max(income_df_q.loc[:,y_data_line[0]])* 1.2], secondary_y = True)
     fig.update_yaxes(showticklabels= True, showgrid = False, zeroline=True, tickprefix="%")
     fig.update_layout(title = titles, titlefont_size=15, legend=dict(orientation="h"), template=template)
+    fig.update_layout(template="myID")
     st.plotly_chart(fig)
 
 
@@ -112,4 +114,5 @@ def balance_chart(input_ticker, balance_df):
     fig.update_yaxes(title_text="Liabilities Rate", showticklabels= True, showgrid = True, zeroline=True, zerolinecolor='LightPink', ticksuffix="%", secondary_y = True)
     fig.update_yaxes(title_text= "Asset", showticklabels= True, showgrid = False, zeroline=True, ticksuffix="%", secondary_y = False)
     fig.update_layout(title = titles, titlefont_size=15, legend=dict(orientation="h"), template=template)
+    fig.update_layout(template="myID")
     st.plotly_chart(fig)
