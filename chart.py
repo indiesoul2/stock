@@ -342,7 +342,7 @@ def kor_earning_chart(input_ticker, com_name, ttm_df, annual_df):
     fig.update_yaxes(title_text='ROE', secondary_y = False)
     fig.update_yaxes(title_text='PER', secondary_y = False)
     fig.update_yaxes(title_text='PBR', secondary_y = True)
-    fig.update_yaxes(showticklabels= True, showgrid = False, zeroline=True)#, ticksuffix="%")
+    fig.update_yaxes(showticklabels= True, showgrid = False, zeroline=True)#, ticksuffix="%")##cja
     fig.update_layout(title = titles, titlefont_size=15, legend=dict(orientation="h"), template=template)
     st.plotly_chart(fig)
 
